@@ -14,23 +14,25 @@ The key for building new CG models is to calibrate the definition and interactio
 
 ## Assignment 2
 
-Intro
+Not bound to the periodic table anymore! We can now design "atoms" with arbitrary interactions begging the question: what structures will they form based on their pair interactions? In this assignment let's play with pairwise interactions and phase diagrams.
 
 ### Instructions
 
-2a. 
+2a. Take again the in.3dlj script from the first assignment, but change the Lennard-Jones cutoff from 1.2 to 2.5. Now interactions are attractive! Fix the temperature to 1.0, and vary the density and the interaction strength. Briefly discuss the differences between varying temperature and varying LJ interaction strength.
+Run a set of simulations to identify and discuss the expected theoretical phase diagram https://en.wikipedia.org/wiki/Lennard-Jones_potential. Support your arguments with the set of structural and dynamics properties that you deem appropriate.
 
-2b. 
+2b. DLVO, charges. CHECK PAIR_COLLOID AND PHASE DIAGRAMS IN LITERATURE.
 
 ## Assignment 3
 
-Intro
+
 
 ### Instructions
 
-3a. 
+3a. Switch to patchy particles with 2 patches. Check phase diagram. (CHECK PAPERS, QUESTIONS DEPEND ON LITERATURE AND MODELS WE IMPLEMENT)
 
-3b. 
+
+3b. Switch to 3-4 patches. Check phase diagram. (CHECK PAPERS, QUESTIONS DEPEND ON LITERATURE AND MODELS WE IMPLEMENT)
 
 ## Assignment 4
 
