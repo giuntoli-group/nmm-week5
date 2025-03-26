@@ -1,6 +1,6 @@
 # nmm-week5
 
-What is a particle? In celebration of spherical cows, this week introduces Coarse-Grained MD, where the beads of the simulation do not necessarily correspond to individual atoms. These models lose predictive power but gain tremendous flexibility. In this week's assignment you will focus on separate particles with complex interatomic interactions, able to represent many materials from Quantum Dots to Yogurt!
+What is a particle? In celebration of spherical cows, this week introduces Coarse-Grained MD, where the beads of the simulation do not necessarily correspond to individual atoms. These models lose predictive power but gain tremendous flexibility. In this week's assignment you will focus on separate particles with complex interatomic interactions, able to represent any colloidal material from Quantum Dots to Yogurt!
 
 ## Assignment 1
 
@@ -14,18 +14,18 @@ The key for building new CG models is to calibrate the definition and interactio
 
 ## Assignment 2
 
-Not bound to the periodic table anymore! We can now design "atoms" with arbitrary interactions begging the question: what structures will they form based on their pair interactions? In this assignment let's play with pairwise interactions and phase diagrams.
+Not bound to the periodic table anymore! We can now design "atoms" with arbitrary interactions begging the question: what structures will they form based on their pair interactions? In this assignment let's play with widely-used pairwise interactions and phase diagrams.
 
 ### Instructions
 
 2a. Take again the in.3dlj script from the first assignment, but change the Lennard-Jones cutoff from 1.2 to 2.5. Now interactions are attractive! Fix the temperature to 1.0, and vary the density and the interaction strength. Briefly discuss the differences between varying temperature and varying LJ interaction strength.
 Run a set of simulations to identify and discuss the expected theoretical phase diagram https://en.wikipedia.org/wiki/Lennard-Jones_potential. Support your arguments with the set of structural and dynamics properties that you deem appropriate.
 
-2b. DLVO, charges. CHECK PAIR_COLLOID AND PHASE DIAGRAMS IN LITERATURE.
+2b. DLVO. CHECK PAIR_YUKAWA/COLLOID AND PHASE DIAGRAMS IN LITERATURE (E.G., CHECK https://doi.org/10.1063/1.453924).
 
 ## Assignment 3
 
-
+Not all colloidal particles have spherical, isotropic interactions! Directional interactions are often present, as a result of internal chemical structure or functionalization. In this assignment, learn how directional interactions can be implemented by adding attractive patches.
 
 ### Instructions
 
@@ -36,10 +36,10 @@ Run a set of simulations to identify and discuss the expected theoretical phase 
 
 ## Assignment 4
 
-Intro
+Equilibrium phase diagrams are fun, but colloids are very interesting non-newtonian fluids! Let's check their rheological properties in this assignment. 
 
 ### Instructions
 
-4a. 
+4a. Shear thinning: structure/contacts evolution+viscosity
 
-4b. 
+4b. Shear thickening: structure/contacts evolution+viscosity
