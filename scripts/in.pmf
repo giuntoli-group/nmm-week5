@@ -1,0 +1,123 @@
+dimension	3
+units           metal
+atom_style      full
+boundary        p p p
+
+#--------------Read Atoms-----------------------------------
+
+read_data c320_pair_wo_bonds.data
+mass * 12.0
+
+group           c320a id <= 320
+group           c320b id > 320
+
+#--------------Define Interatomic Potential-------------------
+
+neighbor            0.5 bin
+neigh_modify        delay 5 every 1
+
+# the below coefficients are taken from lammps example folder 
+# https://github.com/lammps/lammps/blob/develop/examples/airebo/in.airebo-m
+
+#pair_style          airebo 3.0 1 1
+#pair_coeff          * * CH.airebo C
+
+#pair_style          airebo/morse 3.0 1 1
+#pair_coeff          * * CH.airebo-m C
+
+# I also found this reference for fullerene
+# https://github.com/amirhajibabaei/AutoForce/tree/main/examples/LAMMPS/fullerene-Airebo
+# they turn off the LJ and TORSION flags for some reason. We can test both cases
+
+pair_style          airebo 6 0 0
+pair_coeff          * * CH.airebo C
+
+#pair_style          airebo/morse 6 0 0
+#pair_coeff          * * CH.airebo-m C
+
+compute 3 all pe/atom
+compute 4 all stress/atom NULL pair
+
+compute comA c320a com
+compute comB c320b com
+
+fix 3 c320a momentum 1 linear 1 1 1 
+fix 4 c320b momentum 1 linear 1 1 1 
+#---------Run the simulation for thermal equilibration--------
+
+
+thermo 1000
+velocity all create 300.0 4928459
+#minimize 0.0 1.0e-8 1000 100000
+
+fix 2 all nve
+timestep            0.0005
+
+run 10000
+
+reset_timestep 0
+
+thermo_style custom step time temp press pe ke etotal lx 
+thermo_modify   line yaml format none
+
+dump 1 all custom 100 traj.dat id x y z vx vy vz c_3 c_4[1] c_4[2] c_4[3]
+
+
+run 10000
+write_data      equil.data
+undump 1
+reset_timestep 0
+# Fix the com of the two groups
+
+
+# Deform at larger steps, effectively the potential is zero 
+
+#variable        lbox equal ${lx}
+label           loop
+variable        loop_count equal 9
+variable        a loop ${loop_count}
+variable        boxLength0 equal 10*${a}
+variable        boxLengthF equal 220-10*${a}
+
+fix             compress all deform 1 x final ${boxLength0} ${boxLengthF} units box
+dump            dumpCompress all custom 1000 lmp_compress/dump.compress${a} id type xu yu zu vx vy vz fx fy fz
+dump_modify     dumpCompress sort id
+run             10000
+
+unfix compress
+undump dumpCompress
+
+
+dump            2 all custom 100 lmp_data/dump.data${a} id type xu yu zu fx fy fz
+dump_modify     2 sort id
+run 10000
+
+undump 2
+
+next            a
+jump            SELF loop
+
+# Deform at mush smaller steps
+
+label           loop2
+variable        b loop 20
+variable        b_tag   equal ${loop_count}+1*${b}
+variable        boxLength0 equal 90+0.25*${b}
+variable        boxLengthF equal 130-0.25*${b}   # L_box=21.26296 for c=20%
+
+fix             compress all deform 1 x final ${boxLength0} ${boxLengthF} units box
+dump            dumpCompress all custom 10000 lmp_compress/dump.compress${b_tag} id type xu yu zu vx vy vz fx fy fz
+dump_modify     dumpCompress sort id
+run             10000
+
+unfix compress
+undump dumpCompress
+
+dump            3 all custom 100 lmp_data/dump.data${b_tag} id type xu yu zu vx vy vz fx fy fz
+dump_modify     3 sort id
+run 10000
+
+undump 3
+
+next            b
+jump            SELF loop2
