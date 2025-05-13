@@ -8,16 +8,15 @@ The key for building new CG models is to calibrate the definition and interactio
 
 ### Instructions
 
-1a. After visualizing the c60-bonds.data file, run the fullerene-PMF.in simulation. 
+1a. After visualizing the c60-bonds.data file, run the fullerene-PMF.in simulation. MAKE FILE NAMES COHERENT
 
 (i) What is the role of the looping structure in this simulation?
 
 (ii) From the thermodynamic information in the log file/the trajectory, extract two plots: the force and the potential energy between the two molecules as a function of the distance between their centers of mass. GIVE POST-PROCESSING INSTRUCTIONS HERE. 
-Note that the sampling done in the given simulation script is quite simplistic to make the simulation shorter. OPTIONAL: how does the result change with much longer sampling at each step of the loop?
 
 1b. Time to coarse-grain!
 
-(i) Fit your potential energy plot with an interatomic potential function of your choice and report the values of the fitting parameters.
+(i) Fit your potential energy plot with an interatomic potential function of your choice and report the values of the fitting parameters. 
 
 (ii) How would you now define a simulation of coarse-grained particles interacting with your effective potential? Specify all the information you would need to set it up.
 
@@ -27,31 +26,37 @@ Not bound to the periodic table anymore! We can now design "atoms" with arbitrar
 
 ### Instructions
 
-2a. Take the new in.3dlj script, using a cutoff of 2.5 for the Lennard-Jones potential. 
+2a. Take the new in.3dlj script, using a cutoff of 2.5 for the Lennard-Jones potential. UPDATE SCRIPT, QUESTION MARKS ON KEY PARAMETERS
 
-(i) Fix the temperature to 1.0, and vary the particle density and interaction strength. Report snapshots and quantitative metrics (on structure and/or dynamics) for different phases of the system, including at least a liquid phase, a "gas+solid" phase, and a crystalline phase. Pro tip: equilibrate long enough, and stay far away from the phase boundaries unless you want to wait for a long time.
+(i) Fix the temperature to 1.0, and vary the particle density and interaction strength. Report snapshots and quantitative metrics (on structure and/or dynamics) for different phases of the system, including at least a liquid phase and a crystalline phase. Pro tip: equilibrate long enough, and stay far away from the phase boundaries unless you want to wait for a long time.
 
 ## Assignment 3 - Patch up
 
-Not all colloidal particles have spherical, isotropic interactions! Directional interactions are often present as a result of internal chemical structure or functionalization. In this assignment, learn how directional interactions can be implemented by adding attractive patches on inert cores.
+Not all colloidal particles have spherical, isotropic interactions! Directional interactions are often present as a result of internal chemical structure or functionalization. In this assignment, learn how directional interactions can be implemented by adding attractive patches on repulsive cores.
 
-### Instructions MORE DETAILS AFTER TESTING
+### Instructions 
 
-3a. Switch to patchy particles with 2 patches. Explore phase diagram/structures.
+3a. Explore the phase diagrams of patchy particle systems.
 
-3b. Switch to 3-4 patches. Explore phase diagram, find at least N phases.
+(i) Build at least two initial data files with different compositions of patchy particles, each particle having 2, 3, or 4 patches. To do so PIZZA.PY INSTRUCTIONS 
+
+(ii) For each composition, use the LAMMPS SCRIPT file and vary thermodynamics conditions (temperature, packing fraction) to report at least two different phases. Justify your choice of composition, equilibration time, and quantitative metrics to define the structures. 
+
+Pro tip: you can search the literature to guide your choices. Or just run random simulations and see what sticks, who are we to judge how you want to spend your time.
 
 ## Assignment 4 - Look Ma, no hands!
 
-Equilibrium phase diagrams are fun, but colloids are very interesting non-Newtonian fluids! Let's check their rheological properties in this assignment. 
+Equilibrium phase diagrams are fun, but colloids are very interesting non-Newtonian fluids! Let's check their rheology in this assignment. 
 
 ### Instructions
 
-4a. Shear thinning: start from final structure of assignment 2, with epsilon=? and density=? 
+4a. Start from an equilibrated structure obtained with the in.3dlj script (see assignment 2) with ADD PARAMETERS: SIZE, ETA, T, EPSILON, ETC...
 
-(i) run the simulation shear.in, extract+plot stress curve, calculate viscosity in steady state.
+(i) Run the simulation shear.in CHECK NAME (FIX SHEAR RATE TO HIGHEST), and obtain the viscosity from the resulting stress curve by ADD INSTRUCTIONS. What is the algorithm used to stabilize the temperature in the system?
 
-(ii) repeat for different shear rates. Plot viscosity(shear rate). Power law? Lower limit for zero shear viscosity? 
+(ii) Repeat the simulation for smaller shear rates. Following the same procedure as before, make a plot of viscosity as a function of shear rate (in log-log scale). Can you fit a power law to it? Can you determine a lower limit for the zero shear viscosity? 
+
+Pro tip: change shear rate logarithmically. Be mindful of the resources needed: anything lower than a shear rate of 0.001 will take at least several hours to run.
 
 4b. (OPTIONAL, HARD) Calculate the zero shear viscosity. This can be done in a couple of ways [(or more, none easy)](https://docs.lammps.org/Howto_viscosity.html):
 
