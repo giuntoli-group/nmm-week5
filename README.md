@@ -60,10 +60,7 @@ Equilibrium phase diagrams are fun, but colloids are very interesting non-Newton
 (i) Run the simulation `in.shear`, and obtain the viscosity from the resulting stress curve. The simulations runs in 15 minutes at shear rate 1.0 with the above parameters. What is the algorithm used to stabilize the temperature in the system?
 
 > **Hints for viscosity calculation:** Thermodynamic output is stored in YAML format, which can be conveniently loaded into a pandas dataframe. See the [documentation](https://docs.lammps.org/Howto_structured_data.html#yaml-format-thermo-style-or-dump-style-output) for more details on YAML-formatted thermo output. You can use the code snippet below to parse the `log.lammps` file. Once loaded, search for the column labelled `c_s4`, check the corresponding `compute` command in the LAMMPS input script to explain what this quantity represents. Plot the stress-strain curves (how can you obtain the values of stress at a given strain value and simulation time step?). The stress typically rises sharply at first (elastic response), reaches a maximum (the overshoot), and then levels off (steady flow). Extract the average value of the stress in this plateau region. Then, divide this average stress by the applied shear rate. This gives you the shear viscosity
-$$
-\eta = \frac{\langle \sigma \rangle}{\dot{\gamma}}
-$$
-where $\langle \sigma \rangle$ is the mean steady-state stress and $\dot{\gamma}$ is the shear rate.
+$$\eta = \frac{\langle \sigma \rangle}{\dot{\gamma}}$$ where $\langle \sigma \rangle$ is the mean steady-state stress and $\dot{\gamma}$ is the shear rate.
 
 ```python
 import re, yaml
