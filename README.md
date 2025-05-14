@@ -8,11 +8,13 @@ The key for building new CG models is to calibrate the definition and interactio
 
 ### Instructions
 
-1a. After visualizing the c60-bonds.data file, run the fullerene-PMF.in simulation. MAKE FILE NAMES COHERENT
+1a. After visualizing the c60-bonds.data file, run the `in.fullerene` simulation.
 
 (i) What is the role of the looping structure in this simulation?
 
-(ii) From the thermodynamic information in the log file/the trajectory, extract two plots: the force and the potential energy between the two molecules as a function of the distance between their centers of mass. GIVE POST-PROCESSING INSTRUCTIONS HERE. 
+(ii) From the thermodynamic information in the log file/the trajectory, extract two plots: the force and the potential energy between the two molecules as a function of the distance between their centers of mass.
+
+> **Hints for the PMF calculation:** We save the forces acting on every atom (fx, fy, fz). Identify different molecules in the simulation using MDAnalysis (what does `u.atoms.fragments` do?). You can access the forces on particles just like positions: `u.atoms.forces`. Sum the forces over all atoms in each molecule to get the total force vector on molecule 1 and molecule 2. Compute the centre of mass of each molecule, then the vector connecting them. Project the force on one molecule onto this vector (why?). Store the distance and projected force for each frame. Then average the forces in distance bins and integrate using `scipy.integrate` (we let you decide which function to use) to get the PMF.
 
 1b. Time to coarse-grain!
 
@@ -26,9 +28,11 @@ Not bound to the periodic table anymore! We can now design "atoms" with arbitrar
 
 ### Instructions
 
-2a. Take the new in.3dlj script, using a cutoff of 2.5 for the Lennard-Jones potential. UPDATE SCRIPT, QUESTION MARKS ON KEY PARAMETERS
+2a. Take the new `in.3dlj` script, using a cutoff of 2.5 for the Lennard-Jones potential. We placed question marks for the parameters you need to change. If you try to run the script as is, it will throw an error. Look for comments with `!!!!!!!!!!` to locate those parameters and adjust accordingly.
 
-(i) Fix the temperature to 1.0, and vary the particle density and interaction strength. Report snapshots and quantitative metrics (on structure and/or dynamics) for different phases of the system, including at least a liquid phase and a crystalline phase. Pro tip: equilibrate long enough, and stay far away from the phase boundaries unless you want to wait for a long time.
+(i) Fix the temperature to 1.0, and vary the particle density and interaction strength. Report snapshots and quantitative metrics (on structure and/or dynamics) for different phases of the system, including at least a liquid phase and a crystalline phase.
+
+> **Pro tip:** Equilibrate long enough, and stay far away from the phase boundaries unless you want to wait for a long time.
 
 ## Assignment 3 - Patch up
 
@@ -36,11 +40,11 @@ Not all colloidal particles have spherical, isotropic interactions! Directional 
 
 ### Instructions 
 
-3a. Explore the phase diagrams of patchy particle systems.
+3a. Explore the phase diagrams of patchy particle systems in 2D.
 
-(i) Build at least two initial data files with different compositions of patchy particles, each particle having 2, 3, or 4 patches. To do so PIZZA.PY INSTRUCTIONS 
+(i) Build at least two initial data files with different compositions of patchy particles, each particle having 2, 3, or 4 patches. To do so read the `create_patch.py` and replace the random numbers in the script with your system parameters. More comments in the script. The script uses a Python tool created for LAMMPS called [pizza.py](https://lammps.github.io/pizza/). It is written in Python2, so make sure to load it from the modules stack on Habrok. Also make sure to run `create_patch.py` in the same directory as the two module files provided: `patch.py` and `data.py` 
 
-(ii) For each composition, use the LAMMPS SCRIPT file and vary thermodynamics conditions (temperature, packing fraction) to report at least two different phases. Justify your choice of composition, equilibration time, and quantitative metrics to define the structures. 
+(ii) For each composition, use the `in.patchy` file and vary thermodynamics conditions (temperature, packing fraction) to report at least two different phases. Justify your choice of composition, equilibration time, and quantitative metrics to define the structures. 
 
 Pro tip: you can search the literature to guide your choices. Or just run random simulations and see what sticks, who are we to judge how you want to spend your time.
 
