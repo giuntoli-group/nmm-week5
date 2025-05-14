@@ -46,7 +46,7 @@ Not all colloidal particles have spherical, isotropic interactions! Directional 
 
 (ii) For each composition, use the `in.patchy` file and vary thermodynamics conditions (temperature, packing fraction) to report at least two different phases. Justify your choice of composition, equilibration time, and quantitative metrics to define the structures. 
 
-Pro tip: you can search the literature to guide your choices. Or just run random simulations and see what sticks, who are we to judge how you want to spend your time.
+> **Pro tip:** You can search the literature to guide your choices. Or just run random simulations and see what sticks, who are we to judge how you want to spend your time.
 
 ## Assignment 4 - Look Ma, no hands!
 
@@ -54,15 +54,43 @@ Equilibrium phase diagrams are fun, but colloids are very interesting non-Newton
 
 ### Instructions
 
-4a. Start from an equilibrated structure obtained with the in.3dlj script (see assignment 2) with ADD PARAMETERS: SIZE, ETA, T, EPSILON, ETC...
+4a. Start from an equilibrated structure obtained with the `in.3dlj` script (see assignment 2) with 2048 particles, temperature 1.0, packing fraction 0.58, $\varepsilon = 1.0$.
 
-(i) Run the simulation shear.in CHECK NAME (FIX SHEAR RATE TO HIGHEST), and obtain the viscosity from the resulting stress curve by ADD INSTRUCTIONS. What is the algorithm used to stabilize the temperature in the system?
+
+(i) Run the simulation `in.shear`, and obtain the viscosity from the resulting stress curve. The simulations runs in 15 minutes at shear rate 1.0 with the above parameters. What is the algorithm used to stabilize the temperature in the system?
+
+> **Hints for viscosity calculation:** Thermodynamic output is stored in YAML format, which can be conveniently loaded into a pandas dataframe. See the [documentation](https://docs.lammps.org/Howto_structured_data.html#yaml-format-thermo-style-or-dump-style-output) for more details on YAML-formatted thermo output. You can use the code snippet below to parse the `log.lammps` file. Once loaded, search for the column labelled `c_s4`, check the corresponding `compute` command in the LAMMPS input script to explain what this quantity represents. Plot the stress-strain curves (how can you obtain the values of stress at a given strain value and simulation time step?). The stress typically rises sharply at first (elastic response), reaches a maximum (the overshoot), and then levels off (steady flow). Extract the average value of the stress in this plateau region. Then, divide this average stress by the applied shear rate. This gives you the shear viscosity
+$$
+\eta = \frac{\langle \sigma \rangle}{\dot{\gamma}}
+$$
+where $\langle \sigma \rangle$ is the mean steady-state stress and $\dot{\gamma}$ is the shear rate.
+
+```python
+import re, yaml
+try:
+    from yaml import CSafeLoader as Loader
+except ImportError:
+    from yaml import SafeLoader as Loader
+
+docs = ""
+with open('log.lammps') as f:
+    for line in f:
+        m = re.search(r"^(keywords:.*$|data:$|---$|\.\.\.$|  - \[.*\]$)", line)
+        if m:
+            docs += m.group(0) + '\n'
+
+thermo = list(yaml.load_all(docs, Loader=Loader))
+df = pd.DataFrame(data=thermo[1]['data'], columns=thermo[1]['keywords'])
+```
+
+
+
 
 (ii) Repeat the simulation for smaller shear rates. Following the same procedure as before, make a plot of viscosity as a function of shear rate (in log-log scale). Can you fit a power law to it? Can you determine a lower limit for the zero shear viscosity? 
 
-Pro tip: change shear rate logarithmically. Be mindful of the resources needed: anything lower than a shear rate of 0.001 will take at least several hours to run.
+> **Pro tip:** Change shear rate logarithmically. Be mindful of the resources needed: anything lower than a shear rate of 0.001 will take at least several hours to run.
 
-4b. (OPTIONAL, HARD) Calculate the zero shear viscosity. This can be done in a couple of ways [(or more, none easy)](https://docs.lammps.org/Howto_viscosity.html):
+**4b. (OPTIONAL, HARD)** Calculate the zero shear viscosity. This can be done in a couple of ways [(or more, none easy)](https://docs.lammps.org/Howto_viscosity.html):
 
 (i) Keep doing what you were doing in 4a, but MUUUCH slower. Arm yourself with patience, and good luck!
 
