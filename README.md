@@ -64,6 +64,7 @@ $$\eta = \frac{\langle \sigma \rangle}{\dot{\gamma}}$$ where $\langle \sigma \ra
 
 ```python
 import re, yaml
+import pandas as pd
 try:
     from yaml import CSafeLoader as Loader
 except ImportError:
