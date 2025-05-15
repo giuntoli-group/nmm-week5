@@ -48,7 +48,7 @@ variable        large_shift equal 0.3     # moves the fullerene molecules toward
 displace_atoms  c60a move ${large_shift} 0 0 units box 
 displace_atoms  c60b move -${large_shift} 0 0 units box 
 
-dump            2 all custom 10000 lmp_data/dump.data${a} id type xu yu zu fx fy fz
+dump            2 all custom 500 lmp_data/dump.data${a} id type xu yu zu fx fy fz
 dump_modify     2 sort id
 run 5000
 undump 2
@@ -62,7 +62,7 @@ variable        b_tag   equal ${loop_count}+1*${b}
 variable        small_shift equal 0.1     
 displace_atoms  c60a move ${small_shift} 0 0 units box
 displace_atoms  c60b move -${small_shift} 0 0 units box
-dump            3 all custom 10000 lmp_data/dump.data${b_tag} id type xu yu zu vx vy vz fx fy fz
+dump            3 all custom 500 lmp_data/dump.data${b_tag} id type xu yu zu vx vy vz fx fy fz
 dump_modify     3 sort id
 run 5000
 undump 3
