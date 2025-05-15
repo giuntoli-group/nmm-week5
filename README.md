@@ -8,7 +8,7 @@ The key for building new CG models is to calibrate the definition and interactio
 
 ### Instructions
 
-1a. After visualizing the c60-bonds.data file, run the `in.fullerene` simulation.
+1a. After visualizing the c60-bonds.data file, run the `in.fullerene` simulation. Create an empty directory `lmp_data/` in the same directory as the script.
 
 (i) What is the role of the looping structure in this simulation?
 
