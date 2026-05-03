@@ -46,7 +46,7 @@ Not all colloidal particles have spherical, isotropic interactions! Directional 
 
 3a. Explore the phase diagrams of patchy particle systems in 2D.
 
-(i) Build at least two initial data files with different compositions of patchy particles, each particle having 2, 3, or 4 patches. To do so read the `create_patch.py` and replace the random numbers in the script with your system parameters. More comments in the script. The script uses a Python tool created for LAMMPS called [pizza.py](https://lammps.github.io/pizza/). It is written in Python2, so make sure to load it from the modules stack on Habrok. Also make sure to run `create_patch.py` in the same directory as the two module files provided: `patch.py` and `data.py` 
+(i) Build at least three initial data files with different compositions of patchy particles, each particle having 2, 3, or 4 patches. To do so, read the `create_patch.py` and replace the random numbers in the script with your system parameters. More comments in the script. The script uses a Python tool created for LAMMPS called [pizza.py](https://lammps.github.io/pizza/). It is written in Python2, so make sure to load it from the modules stack on Habrok. Also make sure to run `create_patch.py` in the same directory as the two module files provided: `patch.py` and `data.py` 
 
 (ii) For each composition, use the `in.patchy` file and vary thermodynamics conditions (temperature, packing fraction) to report at least two different phases. Justify your choice of composition, equilibration time, and quantitative metrics to define the structures. 
 
