@@ -1,7 +1,8 @@
 # nmm-week5
 
 In celebration of spherical cows, this week introduces Coarse-Grained MD, where the beads of the simulation do not necessarily correspond to individual atoms. These models lose predictive power but gain tremendous flexibility. In this week's assignment, you will focus on separate particles with complex interatomic interactions, able to represent any colloidal material from Quantum Dots to Yogurt!
-*Important note: not all 4 assignments are mandatory for your report! Do assignments 1 and 2, then choose one between assignments 3 and 4.*
+
+**Important note: not all 4 assignments are mandatory for your report! Do assignments 1 and 2, then choose one between assignments 3 and 4.**
 
 ## Assignment 1 - What is a particle?
 
