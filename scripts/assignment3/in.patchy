@@ -27,7 +27,7 @@ fix                    fLANG all langevin 1.0 1.0 1.0 156454
 neigh_modify           exclude molecule/intra all
 fix                    rigidNVE all rigid/nve molecule
 
-# Multi-step minimisation stolen from here:
+# Multi-step minimisation taken from here:
 # https://github.com/ensemble-learning/simpy/blob/master/tools/caltech/dat/LAMMPS/in.lammps.anneal
 
 dump            1 all atom 25 minimise.dat
