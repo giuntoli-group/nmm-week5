@@ -48,7 +48,7 @@ Not all colloidal particles have spherical, isotropic interactions! Directional 
 
 (i) Build at least three initial data files with different compositions of patchy particles, each particle having 2, 3, or 4 patches. To do so, read the `create_patch.py` and replace the random numbers in the script with your system parameters. More comments in the script. The script uses a Python tool created for LAMMPS called [pizza.py](https://lammps.github.io/pizza/). It is written in Python2, so make sure to load it from the modules stack on Habrok. Also make sure to run `create_patch.py` in the same directory as the two module files provided: `patch.py` and `data.py` 
 
-(ii) For each composition, use the `in.patchy` file and vary thermodynamics conditions (temperature, packing fraction) to report at least two different phases. Justify your choice of composition, equilibration time, and quantitative metrics to define the structures. 
+(ii) For each composition, use the `in.patchy` file and vary thermodynamics conditions (temperature, packing fraction) to report at the minimum two different phases (but at least one more is preferred!). Justify your choice of composition, equilibration time, and quantitative metrics to define the structures. 
 
 > **Pro tip:** You can search the literature to guide your choices. Or just run random simulations and see what sticks, who are we to judge how you want to spend your time.
 
