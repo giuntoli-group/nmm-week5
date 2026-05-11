@@ -31,7 +31,7 @@ p.lattice = [L, L]              # square lattice of size L x L
 
 # ring: diam,N,1,2 = one large part with equatorial ring of N, types 1,2
 
-# we fix the dimater to 2, set the radius of type 1 particles to 1.0  in OVITO
+# we fix the diamater to 2, set the radius of type 1 particles to 1.0  in OVITO
 p.build(Nx, "ring", 2, x, 1, 2)
 p.build(Ny, "ring", 2, y, 1, 2)
 
