@@ -22,7 +22,7 @@ The key for building new CG models is to calibrate the definition and interactio
 
 (i) Fit your potential energy plot with an interatomic potential function of your choice and report the values of the fitting parameters. 
 
-(ii) How would you now define a simulation of coarse-grained particles interacting with your effective potential? Specify all the information you would need to set it up.
+(ii) How would you now define a simulation of coarse-grained particles interacting with your effective potential? Specify all the information you would need to set it up. Be mindful of the difference between particle density and packing fraction!
 
 (iii) (OPTIONAL) actually set up and run such coarse-grained simulation, and compare the results of the CG and AA models (for example comparing the RDF peak positions for the centers of mass).
 
